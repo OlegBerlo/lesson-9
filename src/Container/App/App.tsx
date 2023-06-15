@@ -1,8 +1,11 @@
+import { Container } from "@mui/material";
 import Header from "Container/Header/Header";
 import CssBaseline from "@mui/material/CssBaseline";
 import { StyledEngineProvider } from "@mui/material/styles";
-import Main from "Container/Main/Main";
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import CartPage from "pages/Cart/CartPage";
+import Home from "pages/Home/Home";
 
 type ProductsInCart = {
   [id: number]: number;
@@ -25,7 +28,15 @@ const App = () => {
     <StyledEngineProvider injectFirst>
       <CssBaseline />
       <Header productsInCart={productsInCart} />
-      <Main addProductToCart={addProductToCart} />
+      <Container sx={{ padding: "40px 0" }}>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home addProductToCart={addProductToCart} />}
+          />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </Container>
     </StyledEngineProvider>
   );
 };
